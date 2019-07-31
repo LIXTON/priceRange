@@ -67,7 +67,7 @@ class PriceController extends aController {
             "endDate" => $newRecord->endDate
         ];
         $list = $this->model->read($filter);
-        $scenarioList = $this->fixRecords($list, $scenario);
+        $scenarioList = $this->fixRecords($newRecord, $list, $scenario);
         
         $this->updateRecords($scenarioList);
     }
@@ -89,10 +89,10 @@ class PriceController extends aController {
      *  @param $scenario: string - specify the scenario CREATE/UPDATE
      *  @return $scenarioList: array of arrays
      */
-    protected function fixRecords($list, $scenario) {
+    protected function fixRecords($newRecord, $list, $scenario) {
         $scenarioList = [];
         foreach($list as $k => $l) {
-            if ($l instanceof Price) {
+            /*if ($l instanceof Price) {
                 $error = $l->validate();
                 if (!empty($error)) {
                     $this->error["price " . $k] = $error;
@@ -103,7 +103,7 @@ class PriceController extends aController {
             
             if (!empty($this->error)) {
                 continue;
-            }
+            }*/
             
             if ($newRecord->priceId == $l->priceId) {
                 continue;
@@ -112,8 +112,9 @@ class PriceController extends aController {
             if ($newRecord->price == $l->price) {
                 $newRecord->startDate = $newRecord->startDate <= $l->startDate ? $newRecord->startDate:$l->startDate;
                 $newRecord->endDate = $newRecord->endDate >= $l->endDate ? $newRecord->endDate:$l->endDate;
+                
                 $scenarioList[] = [
-                    "id" =>$l->priceId, 
+                    "id" => $l->priceId, 
                     "object" => $l, 
                     "scenario" => $this->model::DELETE
                 ];

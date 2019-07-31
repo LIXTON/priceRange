@@ -28,6 +28,9 @@ if (!empty($controller->error)) {
 // set response code - 200 OK
 http_response_code(200);
 ?>
+<a href="reset.php">Reset</a>
+<br>
+<br>
 <a href="create.php">Create</a>
 <br>
 <table>

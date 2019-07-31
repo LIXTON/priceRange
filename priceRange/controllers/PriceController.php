@@ -69,7 +69,7 @@ class PriceController extends aController {
         $list = $this->model->read($filter);
         $scenarioList = $this->fixRecords($list, $scenario);
         
-        $this->updateRecords();
+        $this->updateRecords($scenarioList);
     }
     
     /*

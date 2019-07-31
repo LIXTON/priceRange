@@ -38,7 +38,7 @@ class PriceController extends aController {
     }
     
     public function resetView() {
-        if (!this->model->resetRecords()) {
+        if (!$this->model->resetRecords()) {
             $this->error[] = "Unable to reset Price records. Try again later.";
         }
     }

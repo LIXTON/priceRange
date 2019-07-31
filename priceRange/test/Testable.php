@@ -1,4 +1,5 @@
 <?php
+
 class Testable {
     public $output = [];
     /*
@@ -10,8 +11,14 @@ class Testable {
         $reflectClass = new ReflectionClass($classTest);
         $this->output = [];
         foreach($reflectClass->getmethods() as $method) {
+            if (strpos($method, "__construct") !== false) {
+                continue;
+            }
+            
             if (strpos($method, "test") !== false) {
-                $this->output[$reflectClass->getName() . " " . $method] = $classTest->$method();
+                $methodName = $method->getName();
+                $classTest->$methodName();
+                var_dump($classTest);
             }
         }
     }

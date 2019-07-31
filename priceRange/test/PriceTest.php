@@ -2,6 +2,12 @@
 include_once '../models/Price.php';
 
 class PriceTest extends Price {
+    /*
+     *  Setup the model to test
+     *  The connection, $db, should be provided
+     *  
+     *  @param $db: iDatabaseConfig
+     */
     public function __construct($db) {
         parent::__construct($db);
         $this->priceId = 1;
@@ -12,13 +18,16 @@ class PriceTest extends Price {
         $this->validate();
     }
     
+    /*
+     *  Verify the create function and rollback
+     */
     public function testCreate() {
         $result = [];
         
         try {
-            $this->db->beginTransaction();
+            $this->conn->beginTransaction();
             $result["result"] = $this->create();
-            $this->db->rollBack();
+            $this->conn->rollBack();
         } catch (PDOException $e) {
             $result["pdo exception"] = $e->getMessage();
         } catch (Exception $e) {
@@ -30,6 +39,9 @@ class PriceTest extends Price {
         return $result;
     }
     
+    /*
+     *  Verify the read function
+     */
     public function testRead() {
         $result = [];
         
@@ -46,6 +58,9 @@ class PriceTest extends Price {
         return $result;
     }
     
+    /*
+     *  Verify the readOne function
+     */
     public function testReadOne() {
         $result = [];
         
@@ -62,13 +77,16 @@ class PriceTest extends Price {
         return $result;
     }
     
+    /*
+     *  Verify the update function and rollback
+     */
     public function testUpdate() {
         $result = [];
         
         try {
-            $this->db->beginTransaction();
+            $this->conn->beginTransaction();
             $result["result"] = $this->update();
-            $this->db->rollBack();
+            $this->conn->rollBack();
         } catch (PDOException $e) {
             $result["pdo exception"] = $e->getMessage();
         } catch (Exception $e) {
@@ -80,13 +98,16 @@ class PriceTest extends Price {
         return $result;
     }
     
+    /*
+     *  Verify the delete function and rollback
+     */
     public function testDelete() {
         $result = [];
         
         try {
-            $this->db->beginTransaction();
+            $this->conn->beginTransaction();
             $result["result"] = $this->delete();
-            $this->db->rollBack();
+            $this->conn->rollBack();
         } catch (PDOException $e) {
             $result["pdo exception"] = $e->getMessage();
         } catch (Exception $e) {
@@ -107,9 +128,9 @@ class PriceTest extends Price {
         $result = [];
         
         try {
-            $this->db->beginTransaction();
+            $this->conn->beginTransaction();
             $result["result"] = $this->resetRecords();
-            $this->db->rollBack();
+            $this->conn->rollBack();
         } catch (PDOException $e) {
             $result["pdo exception"] = $e->getMessage();
         } catch (Exception $e) {

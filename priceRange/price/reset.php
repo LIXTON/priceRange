@@ -18,7 +18,7 @@ if (!empty($controller->error)) {
     die($controller->printError());
 }
     
-$controller->deleteView();
+$controller->resetView();
 
 //  Execute the action view if something went wrong display it
 if(!empty($controller->error)) {

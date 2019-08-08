@@ -12,13 +12,15 @@ $model->priceId = 1;
 $model->startDate = "2019-01-05";
 $model->endDate = "2019-01-07";
 $model->price = 12;
-$controller = new PriceControllerTest($model, $database, $model::READ);
+$controller = new PriceControllerTest($db, $database);
 
 $test = new Testable();
 
 echo "<h2>Test for PriceController</h2><br>";
 $test->runTests($controller);
+var_dump($test->output);
 
 echo "<br><br><h2>Test for Price</h2><br>";
 $test->runTests($model);
+var_dump($test->output);
 ?>

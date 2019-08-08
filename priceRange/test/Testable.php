@@ -17,8 +17,7 @@ class Testable {
             
             if (strpos($method, "test") !== false) {
                 $methodName = $method->getName();
-                $classTest->$methodName();
-                var_dump($classTest);
+                $this->output[$reflectClass->getName() . " " . $methodName] = $classTest->$methodName();
             }
         }
     }

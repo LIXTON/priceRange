@@ -9,8 +9,8 @@ class PriceControllerTest extends PriceController {
      *  
      *  @param $db: iDatabaseConfig
      */
-    public function __construct($db) {
-        $this->model = new Price($db);
+    public function __construct($conn, $db) {
+        $this->model = new Price($conn);
         $this->model->priceId = 12;
         $this->model->startDate = "2019-01-05";
         $this->model->endDate = "2019-01-10";
@@ -31,11 +31,11 @@ class PriceControllerTest extends PriceController {
         $price1->price = 100;
         
         $list = [
-            $price1
+            $this->model
         ];
         $result = [];
-        
-        $result["input"] = $list;
+        $result["input"] = $price1;
+        $result["list"] = $list;
         
         try{
             $result["result"] = $this->fixRecords($price1, $list, $this->model::CREATE);
@@ -53,16 +53,16 @@ class PriceControllerTest extends PriceController {
         
         $price1 = new Price($this->db);
         $price1->priceId = 5;
-        $price1->startDate = "2019-01-06";
-        $price1->endDate = "2019-01-09";
+        $price1->startDate = "2019-01-04";
+        $price1->endDate = "2019-01-11";
         $price1->price = 10;
         
         $list = [
-            $price1
+            $this->model
         ];
         $result = [];
-        
-        $result["input"] = $list;
+        $result["input"] = $price1;
+        $result["list"] = $list;
         
         try{
             $result["result"] = $this->fixRecords($price1, $list, $this->model::CREATE);
@@ -85,14 +85,15 @@ class PriceControllerTest extends PriceController {
         $price1->price = 10;
         
         $list = [
-            $price1
+            $this->model
         ];
         $result = [];
         
-        $result["input"] = $list;
+        $result["input"] = $price1;
+        $result["list"] = $list;
         
         try{
-            $result["result"] = $this->fixRecords($price1, $list, $this->model::UPDATE);
+            $result["result"] = $this->fixRecords($price1, $list, $this->model::CREATE);
         } catch(Exception $e) {
             $result["exception"] = $e->getMessage();
         }
@@ -110,16 +111,16 @@ class PriceControllerTest extends PriceController {
         $price1->startDate = "2019-01-07";
         $price1->endDate = "2019-01-12";
         $price1->price = 10;
-        
         $list = [
-            $price1
+            $this->model
         ];
         $result = [];
         
-        $result["input"] = $list;
+        $result["input"] = $price1;
+        $result["list"] = $list;
         
         try{
-            $result["result"] = $this->fixRecords($price1, $list, $this->model::DELETE);
+            $result["result"] = $this->fixRecords($price1, $list, $this->model::CREATE);
         } catch(Exception $e) {
             $result["exception"] = $e->getMessage();
         }
@@ -139,14 +140,15 @@ class PriceControllerTest extends PriceController {
         $price1->price = 10;
         
         $list = [
-            $price1
+            $this->model
         ];
         $result = [];
         
-        $result["input"] = $list;
+        $result["input"] = $price1;
+        $result["list"] = $list;
         
         try{
-            $result["result"] = $this->fixRecords($price1, $list, $this->model::DELETE);
+            $result["result"] = $this->fixRecords($price1, $list, $this->model::CREATE);
         } catch(Exception $e) {
             $result["exception"] = $e->getMessage();
         }

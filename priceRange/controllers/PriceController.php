@@ -90,9 +90,10 @@ class PriceController extends aController {
      *  @return $scenarioList: array of arrays
      */
     protected function fixRecords($newRecord, $list, $scenario) {
+        $cloneList = $list;
         $scenarioList = [];
-        foreach($list as $k => $l) {
-            /*if ($l instanceof Price) {
+        foreach($cloneList as $k => $l) {
+            if ($l instanceof Price) {
                 $error = $l->validate();
                 if (!empty($error)) {
                     $this->error["price " . $k] = $error;
@@ -103,7 +104,7 @@ class PriceController extends aController {
             
             if (!empty($this->error)) {
                 continue;
-            }*/
+            }
             
             if ($newRecord->priceId == $l->priceId) {
                 continue;
